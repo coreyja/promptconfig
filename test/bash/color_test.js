@@ -2,7 +2,7 @@ import test from "ava"
 import color from "../../lib/bash/color"
 const { raw } = String
 
-test("accepts ANSI 16 color names", (t) => {
+test("accepts ANSI 16 color names with and without tput", (t) => {
   const colorNamesAndCodes = {
     black:          "0",
     red:            "1",
@@ -23,10 +23,12 @@ test("accepts ANSI 16 color names", (t) => {
   }
 
   Object.entries(colorNamesAndCodes).forEach(([name, code]) => {
-    t.is(color(name), `$(tput setaf ${code})`)
+    t.is(color(name, true), `$(tput setaf ${code})`)
+    t.is(color(name, false), raw`'\[\e[38;5;${code}m\]'`)
   })
 })
 
 test("accepts ANSI 256 color codes", (t) => {
-  t.is(color(124), '$(tput setaf 124)')
+  t.is(color(124, true), '$(tput setaf 124)')
+  t.is(color(124, false), raw`'\[\e[38;5;124m\]'`)
 })
