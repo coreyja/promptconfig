@@ -51,7 +51,7 @@ test("color", (t) => {
   t.is(prompt(configuration), dedent(raw`
     function _promptconfig_color_character() {
       if $(exit $exit_status); then
-        printf '\[\e[38;5;0m\]'
+        printf $(tput setaf 0)
       fi
     }
 
@@ -60,7 +60,7 @@ test("color", (t) => {
       local prompt=''
       prompt+=$(_promptconfig_color_character)
       prompt+='❯'
-      prompt+='\[\e[0m\]'
+      prompt+=$(tput sgr0)
       PS1=$prompt
     }
 

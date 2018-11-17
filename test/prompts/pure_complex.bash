@@ -56,9 +56,9 @@ function _promptconfig_component_git_ahead_of_upstream() {
 
 function _promptconfig_color_prompt_character() {
   if $(exit $exit_status); then
-    printf '\[\e[38;5;5m\]'
+    printf $(tput setaf 5)
   else
-    printf '\[\e[38;5;1m\]'
+    printf $(tput setaf 1)
   fi
 }
 
@@ -66,24 +66,24 @@ function _promptconfig_prompt() {
   local exit_status=$?
   local prompt=''
   prompt+='\n'
-  prompt+='\[\e[38;5;4m\]'
+  prompt+=$(tput setaf 4)
   prompt+=$(_promptconfig_working_directory)
-  prompt+='\[\e[0m\]'
+  prompt+=$(tput sgr0)
   prompt+=' '
-  prompt+='\[\e[38;5;242m\]'
+  prompt+=$(tput setaf 242)
   prompt+=$(_promptconfig_git_branch_name)
-  prompt+='\[\e[0m\]'
+  prompt+=$(tput sgr0)
   prompt+=' '
-  prompt+='\[\e[38;5;6m\]'
+  prompt+=$(tput setaf 6)
   prompt+=$(_promptconfig_component_git_behind_upstream)
-  prompt+='\[\e[0m\]'
-  prompt+='\[\e[38;5;6m\]'
+  prompt+=$(tput sgr0)
+  prompt+=$(tput setaf 6)
   prompt+=$(_promptconfig_component_git_ahead_of_upstream)
-  prompt+='\[\e[0m\]'
+  prompt+=$(tput sgr0)
   prompt+='\n'
   prompt+=$(_promptconfig_color_prompt_character)
   prompt+='❯'
-  prompt+='\[\e[0m\]'
+  prompt+=$(tput sgr0)
   prompt+=' '
   PS1=$prompt
 }

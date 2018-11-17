@@ -1,8 +1,8 @@
 function _promptconfig_color_prompt_character() {
   if $(exit $exit_status); then
-    printf '\[\e[38;5;5m\]'
+    printf $(tput setaf 5)
   else
-    printf '\[\e[38;5;1m\]'
+    printf $(tput setaf 1)
   fi
 }
 
@@ -12,7 +12,7 @@ function _promptconfig_prompt() {
   prompt+='\n'
   prompt+=$(_promptconfig_color_prompt_character)
   prompt+='❯'
-  prompt+='\[\e[0m\]'
+  prompt+=$(tput sgr0)
   prompt+=' '
   PS1=$prompt
 }

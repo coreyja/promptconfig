@@ -82,7 +82,7 @@ test("color function", (t) => {
 
     function _promptconfig_color_character() {
       if $(_promptconfig_git_in_directory); then
-        printf '\[\e[38;5;0m\]'
+        printf $(tput setaf 0)
       fi
     }
 
@@ -90,7 +90,7 @@ test("color function", (t) => {
       local prompt=''
       prompt+=$(_promptconfig_color_character)
       prompt+='❯'
-      prompt+='\[\e[0m\]'
+      prompt+=$(tput sgr0)
       PS1=$prompt
     }
 

@@ -16,9 +16,9 @@ test("implicit ANSI color name", (t) => {
   t.is(prompt(configuration), dedent(raw`
     function _promptconfig_prompt() {
       local prompt=''
-      prompt+='\[\e[38;5;7m\]'
+      prompt+=$(tput setaf 7)
       prompt+='❯'
-      prompt+='\[\e[0m\]'
+      prompt+=$(tput sgr0)
       PS1=$prompt
     }
 
@@ -39,9 +39,9 @@ test("implicit ANSI color code", (t) => {
   t.is(prompt(configuration), dedent(raw`
     function _promptconfig_prompt() {
       local prompt=''
-      prompt+='\[\e[38;5;132m\]'
+      prompt+=$(tput setaf 132)
       prompt+='❯'
-      prompt+='\[\e[0m\]'
+      prompt+=$(tput sgr0)
       PS1=$prompt
     }
 
@@ -64,9 +64,9 @@ test("explicit ANSI color name", (t) => {
   t.is(prompt(configuration), dedent(raw`
     function _promptconfig_prompt() {
       local prompt=''
-      prompt+='\[\e[38;5;7m\]'
+      prompt+=$(tput setaf 7)
       prompt+='❯'
-      prompt+='\[\e[0m\]'
+      prompt+=$(tput sgr0)
       PS1=$prompt
     }
 
@@ -89,9 +89,9 @@ test("explicit ANSI color code", (t) => {
   t.is(prompt(configuration), dedent(raw`
     function _promptconfig_prompt() {
       local prompt=''
-      prompt+='\[\e[38;5;132m\]'
+      prompt+=$(tput setaf 132)
       prompt+='❯'
-      prompt+='\[\e[0m\]'
+      prompt+=$(tput sgr0)
       PS1=$prompt
     }
 

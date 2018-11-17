@@ -23,10 +23,10 @@ test("accepts ANSI 16 color names", (t) => {
   }
 
   Object.entries(colorNamesAndCodes).forEach(([name, code]) => {
-    t.is(color(name), raw`'\[\e[38;5;${code}m\]'`)
+    t.is(color(name), `$(tput setaf ${code})`)
   })
 })
 
 test("accepts ANSI 256 color codes", (t) => {
-  t.is(color(124), raw`'\[\e[38;5;124m\]'`)
+  t.is(color(124), '$(tput setaf 124)')
 })
